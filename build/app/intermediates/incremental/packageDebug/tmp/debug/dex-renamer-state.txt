@@ -1,0 +1,4 @@
+#Fri Jul 07 15:42:38 IST 2023
+base.0=C\:\\code\\projects\\summer-school 2023\\summer-school-23-code\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
