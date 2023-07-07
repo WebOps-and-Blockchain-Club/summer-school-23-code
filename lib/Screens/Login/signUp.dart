@@ -151,22 +151,20 @@ class _LoginState extends State<Login> {
                   Pass(),
                   SizedBox(height: 30),
                   LoginButton(),
-                  Padding(
-                    padding: EdgeInsets.only(left: 90),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Don't have a account ?",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(fontSize: 16),
-                            )),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have a account ?",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(fontSize: 16),
+                          )),
+                    ],
                   ),
                 ],
               ),

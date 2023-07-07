@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\code\projects\summer-school 2023\summer-school-23-code\build\windows\CMakeFiles\3dcba561b801da52ef4a19b80e5b10f2\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BCB46593-8CA4-3752-8545-0210B5836027}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

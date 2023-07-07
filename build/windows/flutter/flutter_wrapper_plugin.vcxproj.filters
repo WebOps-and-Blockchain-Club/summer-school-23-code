@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\code\projects\summer-school 2023\summer-school-23-code\windows\flutter\ephemeral\cpp_client_wrapper\core_implementations.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\code\projects\summer-school 2023\summer-school-23-code\windows\flutter\ephemeral\cpp_client_wrapper\standard_codec.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\code\projects\summer-school 2023\summer-school-23-code\windows\flutter\ephemeral\cpp_client_wrapper\plugin_registrar.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\code\projects\summer-school 2023\summer-school-23-code\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BCB46593-8CA4-3752-8545-0210B5836027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{52B61982-716A-37D9-88F9-19ADD7A5FBB3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

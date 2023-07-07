@@ -1,0 +1,10 @@
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/CMakeFiles/INSTALL.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/CMakeFiles/ALL_BUILD.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/CMakeFiles/ZERO_CHECK.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/flutter/CMakeFiles/flutter_assemble.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/flutter/CMakeFiles/INSTALL.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/runner/CMakeFiles/summer_school_23_code.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/runner/CMakeFiles/INSTALL.dir
+C:/code/projects/summer-school 2023/summer-school-23-code/build/windows/runner/CMakeFiles/ALL_BUILD.dir
