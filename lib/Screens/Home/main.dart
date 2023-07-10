@@ -36,12 +36,9 @@ class _HomeState extends State<Home> {
         drawer: CustomDrawer(context),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(43, 52, 103, 1),
-          title: Center(
-            child: Text(
-              'Summer-School',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+          title: const Text(
+            'Summer-School',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
         body: ListView.builder(
