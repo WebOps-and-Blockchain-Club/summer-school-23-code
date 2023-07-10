@@ -17,6 +17,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            backgroundColor: Colors.white,
             leading: IconButton(
                 onPressed: () => Navigator.pop(context),
                 icon: const Image(image: AssetImage('assets/backArrow.png')))),

@@ -21,5 +21,18 @@ class Themes {
           border: OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromRGBO(43, 52, 103, 1)),
               borderRadius: BorderRadius.all(Radius.circular(15))),
-          labelStyle: TextStyle(fontSize: 20)));
+          labelStyle: TextStyle(fontSize: 20)),
+      listTileTheme: ListTileThemeData(
+        tileColor: const Color.fromRGBO(43, 52, 103, 1),
+        textColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromRGBO(43, 52, 103, 1),
+          titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Itim',
+              fontSize: 25),
+          iconTheme: IconThemeData(color: Colors.white)));
 }

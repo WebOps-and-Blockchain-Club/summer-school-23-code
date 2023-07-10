@@ -136,31 +136,29 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/loginImage.jpg',
-                    width: double.infinity,
-                    height: 252,
-                  ),
-                  SizedBox(
+                  const Image(
+                      image: AssetImage('assets/loginImage.jpg'),
+                      fit: BoxFit.fitWidth),
+                  const SizedBox(
                     height: 50,
                   ),
                   Email(),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Pass(),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   LoginButton(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Don't have a account ?",
                         style: TextStyle(fontSize: 16),
                       ),
                       TextButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             "Sign Up",
                             style: TextStyle(fontSize: 16),
                           )),

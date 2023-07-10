@@ -23,11 +23,13 @@ class _CustomCardState extends State<CustomCard> {
     final postDate = widget.postDate;
     return Card(
       margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            title: Text(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, top: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
               //post title
               postTitle,
               style: TextStyle(
@@ -35,7 +37,7 @@ class _CustomCardState extends State<CustomCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(
+            Text(
               //postContent
               postContent,
               style: TextStyle(
@@ -43,28 +45,28 @@ class _CustomCardState extends State<CustomCard> {
                 fontWeight: FontWeight.normal,
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                //postDate
-                postDate,
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  //postDate
+                  postDate,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              TextButton(
-                child: const Text('BUY TICKETS'),
-                onPressed: () {/* ... */},
-              ),
-              const SizedBox(width: 8),
-              const SizedBox(width: 8),
-            ],
-          ),
-        ],
+                TextButton(
+                  child: const Text('BUY TICKETS'),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

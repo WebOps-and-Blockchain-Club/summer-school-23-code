@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../Models/event.dart';
 import './card.dart';
 import './drawer.dart';
 
@@ -10,35 +11,23 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class Event {
-  late String Title;
-  late String Content;
-  late String Date;
-  Event(String Title, String Content, String Date) {
-    this.Title = Title;
-    this.Content = Content;
-    this.Date = Date;
-  }
-}
-
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final EventList = [
-      Event('Hey', 'Content', 'Date'),
+      Event(
+          'Hey',
+          'Content ieuynhr4cik3gy rbiwkeruygf ikyefrgf oqlrgwf qlauiwgef o gwe fk  ywefg u ewygf oqegwrf uqyrgf ',
+          'Date'),
       Event('Hey', 'Content', 'Date'),
       Event('Hey', 'Content', 'Date'),
       Event('Hey', 'Content', 'Date')
     ];
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         drawer: CustomDrawer(context),
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(43, 52, 103, 1),
           title: const Text(
             'Summer-School',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
         body: ListView.builder(
