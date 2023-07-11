@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { User } from "./user";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name: "Events" })
 export class Events {
@@ -17,4 +16,7 @@ export class Events {
 
     @Column()
     user_id!: string;
+
+    @Column()
+    is_valid!: boolean;
 }

@@ -68,7 +68,7 @@ app.get("/login", async (req, resp) => {
             );
         }
     } else {
-        resp.json({ user: "Please login" });
+        resp.json({ user: "Please register" });
     }
 });
 
@@ -109,4 +109,3 @@ AppDataSource.initialize().then(() => {
         console.log(`application is running on port ${port}.`);
     })
 }).catch((err) => console.log("error", err));
-
