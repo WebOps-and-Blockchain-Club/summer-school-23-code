@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:summer_school_23_code/Screens/Home/main.dart';
+import 'package:http/http.dart' as http;
 
 TextEditingController email = TextEditingController();
 TextEditingController pass = TextEditingController();
+
+final LocalStorage storage = LocalStorage('data');
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,13 +18,30 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
+void handleLogin(BuildContext context) {
+  Map<String, String> body = {
+    "email": email.text,
+    "password": pass.text,
+  };
+  http.post(Uri.parse('http://localhost:8000/login'),
+      body: json.encode(body),
+      headers: {'Content-Type': 'application/json'}).then((value) async {
+    final Map<String, dynamic> data = json.decode(value.body);
+
+    await storage.setItem("values",
+        {"token": data["auth"], "role": data["role"], "my_id": data["id"]});
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Home()));
+  });
+}
+
 Widget Email(TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin: EdgeInsets.only(left: 30),
-        child: Text(
+        margin: const EdgeInsets.only(left: 30),
+        child: const Text(
           'Email',
           style: TextStyle(
             color: Colors.black,
@@ -26,7 +50,7 @@ Widget Email(TextEditingController controller) {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       Center(
@@ -35,7 +59,7 @@ Widget Email(TextEditingController controller) {
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromRGBO(43, 52, 103, 1),
                   blurRadius: 6,
@@ -47,7 +71,7 @@ Widget Email(TextEditingController controller) {
           child: TextField(
             controller: controller,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 10),
                 prefixIcon: Icon(Icons.email)),
@@ -63,8 +87,8 @@ Widget Pass(TextEditingController controller) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin: EdgeInsets.only(left: 30),
-        child: Text(
+        margin: const EdgeInsets.only(left: 30),
+        child: const Text(
           'Password',
           style: TextStyle(
             color: Colors.black,
@@ -73,7 +97,7 @@ Widget Pass(TextEditingController controller) {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       Center(
@@ -83,7 +107,7 @@ Widget Pass(TextEditingController controller) {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
-                BoxShadow(
+                const BoxShadow(
                   color: Color.fromRGBO(43, 52, 103, 1),
                   blurRadius: 6,
                   offset: Offset(0, 2),
@@ -94,7 +118,7 @@ Widget Pass(TextEditingController controller) {
           child: TextField(
             controller: controller,
             keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 10),
                 prefixIcon: Icon(Icons.person)),
@@ -105,20 +129,20 @@ Widget Pass(TextEditingController controller) {
   );
 }
 
-Widget LoginButton() {
+Widget LoginButton(context) {
   return Center(
     child: Container(
       width: 100,
       height: 40,
       child: ElevatedButton(
-        child: Text(
+        child: const Text(
           "Login",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
-        onPressed: () {},
+        onPressed: () => handleLogin(context),
       ),
     ),
   );
@@ -133,7 +157,7 @@ class _LoginState extends State<Login> {
         Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color.fromARGB(255, 186, 215, 233),
             ),
             child: SingleChildScrollView(
@@ -153,7 +177,7 @@ class _LoginState extends State<Login> {
                   ),
                   Pass(pass),
                   const SizedBox(height: 30),
-                  LoginButton(),
+                  LoginButton(context),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

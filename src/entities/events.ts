@@ -1,20 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 import { User } from "./user";
 
 @Entity({ name: "Events" })
 export class Events {
-    @PrimaryGeneratedColumn("uuid")
-    event_id!: string;
+  @PrimaryGeneratedColumn("uuid")
+  event_id!: string;
 
-    @Column()
-    name!: string;
+  @Column()
+  title!: string;
 
-    @Column()
-    date!: string;
+  @Column()
+  content!: string;
 
-    @Column()
-    exp_date!: string;
+  @Column()
+  date!: string;
 
-    @Column()
-    user_id!: string;
+  @Column()
+  exp_date!: string;
+
+  @Column()
+  user_id!: string;
 }

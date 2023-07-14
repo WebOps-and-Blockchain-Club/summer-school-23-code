@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summer_school_23_code/Screens/Profile/profile.dart';
 import 'package:summer_school_23_code/themes.dart';
-import 'Screens/Login/signUp.dart';
+import 'Screens/Login/login.dart';
 import 'Screens/Login/newUser.dart';
 import 'Screens/Home/card.dart';
 import 'Screens/Home/main.dart';
@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo', theme: Themes.theme, home: NewUserForm());
+        title: 'Flutter Demo', theme: Themes.theme, home: Login());
   }
 }

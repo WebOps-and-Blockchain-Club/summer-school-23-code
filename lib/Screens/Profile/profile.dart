@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:summer_school_23_code/Models/user.dart';
 import 'package:summer_school_23_code/Screens/Profile/editProfile.dart';
 import 'package:summer_school_23_code/themes.dart';
+import 'package:http/http.dart' as http;
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  late User user;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final user = User(
-        name: "User Name",
-        email: "email@gmail.com",
-        role: "Organiser",
-        metamaskId: "Metamask Id");
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white,

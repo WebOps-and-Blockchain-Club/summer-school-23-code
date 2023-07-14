@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:summer_school_23_code/Models/user.dart';
 import 'package:summer_school_23_code/Screens/Home/main.dart';
-import './signUp.dart';
+import 'login.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 
@@ -13,7 +13,7 @@ TextEditingController email = TextEditingController();
 TextEditingController pass = TextEditingController();
 TextEditingController metaMask = TextEditingController();
 
-final LocalStorage storage = LocalStorage('auth');
+final LocalStorage storage = LocalStorage('data');
 
 class NewUserForm extends StatefulWidget {
   const NewUserForm({super.key});
@@ -34,9 +34,10 @@ void handleSignUp(BuildContext context, String role) {
       body: json.encode(body),
       headers: {'Content-Type': 'application/json'}).then((value) async {
     final Map<String, dynamic> data = json.decode(value.body);
-    print(data);
-    await storage.setItem("token", data["auth"]);
-    print(storage);
+
+    await storage.setItem("values",
+        {"token": data["auth"], "role": data["role"], "my_id": data["id"]});
+
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Home()));
   });

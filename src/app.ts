@@ -35,7 +35,7 @@ app.post("/registration", async (req, resp) => {
       (error, token) => {
         if (error) {
           resp.send({ userInserted: "Cant Insert the User" });
-        } else resp.send(JSON.stringify({ auth: token }));
+        } else resp.send(JSON.stringify({ auth: token, id: user.user_id }));
       }
     );
   } else {
@@ -43,7 +43,7 @@ app.post("/registration", async (req, resp) => {
   }
 });
 
-app.get("/login", async (req, resp) => {
+app.post("/login", async (req, resp) => {
   const userRepo = AppDataSource.getRepository(User);
   let user = await userRepo.findOne({ where: { email: req.body.email } });
   if (user) {
@@ -56,15 +56,17 @@ app.get("/login", async (req, resp) => {
         { expiresIn: "2h" },
         (error, token) => {
           if (error) {
-            resp.json({ user: "user not found" });
+            resp.send(JSON.stringify({ user: "user not found" }));
           }
-          resp.json({ auth: token, role: user?.role });
+          resp.send(
+            JSON.stringify({ auth: token, role: user?.role, id: user?.user_id })
+          );
           return;
         }
       );
     }
   } else {
-    resp.json({ user: "Please login" });
+    resp.send({ user: "Please login" });
   }
 });
 
