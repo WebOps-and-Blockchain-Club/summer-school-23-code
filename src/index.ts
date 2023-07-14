@@ -44,7 +44,6 @@ app.post('/registration', async (req, resp) => {
     } else {
         resp.json({ result: "User already exists" });
     }
-
 });
 
 app.get("/login", async (req, resp) => {
@@ -93,6 +92,12 @@ app.get("/events_org/:user_id", async (req, resp) => {
     const eventRepo = AppDataSource.getRepository(Events);
     const events = await eventRepo.find({ where: { user_id: req.params.user_id } });
     resp.json(events);
+});
+
+app.get("/user/:user_id", async (req, resp) => {
+    const userRepo = AppDataSource.getRepository(User);
+    const user = await userRepo.find({ where: { user_id: req.params.user_id } });
+    resp.json(user);
 });
 
 app.post("/events/:user_id", async (req, resp) => {
