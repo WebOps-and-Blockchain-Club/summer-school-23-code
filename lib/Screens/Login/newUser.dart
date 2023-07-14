@@ -1,6 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:summer_school_23_code/Models/user.dart';
+import 'package:summer_school_23_code/Screens/Home/main.dart';
 import './signUp.dart';
+import 'package:http/http.dart' as http;
+import 'package:localstorage/localstorage.dart';
+
+TextEditingController name = TextEditingController();
+TextEditingController email = TextEditingController();
+TextEditingController pass = TextEditingController();
+TextEditingController metaMask = TextEditingController();
+
+final LocalStorage storage = LocalStorage('auth');
 
 class NewUserForm extends StatefulWidget {
   const NewUserForm({super.key});
@@ -9,41 +22,62 @@ class NewUserForm extends StatefulWidget {
   State<NewUserForm> createState() => _NewUserFormState();
 }
 
-Widget SignButton() {
+void handleSignUp(BuildContext context, String role) {
+  Map<String, String> body = {
+    "name": name.text,
+    "email": email.text,
+    "password": pass.text,
+    "meta_mask_id": metaMask.text,
+    "role": role
+  };
+  http.post(Uri.parse('http://localhost:8000/registration'),
+      body: json.encode(body),
+      headers: {'Content-Type': 'application/json'}).then((value) async {
+    final Map<String, dynamic> data = json.decode(value.body);
+    print(data);
+    await storage.setItem("token", data["auth"]);
+    print(storage);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Home()));
+  });
+}
+
+Widget SignButton(BuildContext context, String role) {
   return Center(
     child: Container(
       width: 200,
       height: 40,
       child: ElevatedButton(
-        child: Text(
+        child: const Text(
           "Sign Up",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
-        onPressed: () {},
+        onPressed: () => handleSignUp(context, role),
       ),
     ),
   );
 }
 
-Widget CustomTextField(String label, double width) {
+Widget CustomTextField(
+    String label, double width, TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin: EdgeInsets.only(left: 30),
+        margin: const EdgeInsets.only(left: 30),
         child: Text(
           '$label',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       Center(
@@ -52,7 +86,7 @@ Widget CustomTextField(String label, double width) {
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromRGBO(43, 52, 103, 1),
                   blurRadius: 6,
@@ -62,8 +96,9 @@ Widget CustomTextField(String label, double width) {
           width: width,
           height: 56,
           child: TextField(
-            style: TextStyle(fontSize: 18),
-            decoration: InputDecoration(
+            controller: controller,
+            style: const TextStyle(fontSize: 18),
+            decoration: const InputDecoration(
               border: InputBorder.none,
             ),
           ),
@@ -74,6 +109,7 @@ Widget CustomTextField(String label, double width) {
 }
 
 class _NewUserFormState extends State<NewUserForm> {
+  String role = "USER";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,13 +124,13 @@ class _NewUserFormState extends State<NewUserForm> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(50),
+                    padding: const EdgeInsets.all(50),
                     height: 200,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 186, 215, 233),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         Text(
                           "New Account",
@@ -127,46 +163,79 @@ class _NewUserFormState extends State<NewUserForm> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Email(),
-                  SizedBox(
+                  Email(email),
+                  const SizedBox(
                     height: 10,
+                  ),
+                  CustomTextField('Name', 360, name),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField('Meta-Mask Id', 360, metaMask),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 5),
-                        child: CustomTextField('First Name', 143),
+                    children: <Widget>[
+                      const Text(
+                        'Role : ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      SizedBox(
-                        width: 20,
+                      Row(
+                        children: [
+                          Radio<String>(
+                            value: 'USER',
+                            groupValue: role,
+                            onChanged: (String? value) {
+                              setState(() {
+                                if (value != null) role = value;
+                              });
+                            },
+                          ),
+                          const Text('USER',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black)),
+                        ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 5),
-                        child: CustomTextField('Last Name', 143),
-                      )
+                      Row(
+                        children: [
+                          Radio<String>(
+                            value: 'ORGANIZER',
+                            groupValue: role,
+                            onChanged: (String? value) {
+                              setState(() {
+                                if (value != null) role = value;
+                              });
+                            },
+                          ),
+                          const Text(
+                            'ORGANIZER',
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  CustomTextField('Meta-Mask Id', 360),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField('Roll', 360),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Pass(),
-                  SizedBox(
+                  Pass(pass),
+                  const SizedBox(
                     height: 20,
                   ),
-                  SignButton(),
-                  SizedBox(
+                  SignButton(context, role),
+                  const SizedBox(
                     height: 20,
                   ),
                 ],

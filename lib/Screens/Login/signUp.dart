@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+TextEditingController email = TextEditingController();
+TextEditingController pass = TextEditingController();
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -8,7 +11,7 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-Widget Email() {
+Widget Email(TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -42,6 +45,7 @@ Widget Email() {
           width: 360,
           height: 56,
           child: TextField(
+            controller: controller,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
                 border: InputBorder.none,
@@ -54,7 +58,7 @@ Widget Email() {
   );
 }
 
-Widget Pass() {
+Widget Pass(TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -88,6 +92,7 @@ Widget Pass() {
           width: 360,
           height: 56,
           child: TextField(
+            controller: controller,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
                 border: InputBorder.none,
@@ -142,11 +147,11 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Email(),
+                  Email(email),
                   const SizedBox(
                     height: 5,
                   ),
-                  Pass(),
+                  Pass(pass),
                   const SizedBox(height: 30),
                   LoginButton(),
                   Row(
