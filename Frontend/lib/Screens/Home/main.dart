@@ -1,18 +1,20 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:provider/provider.dart';
+import 'package:summer_school_23_code/Models/user.dart';
 import 'package:summer_school_23_code/Screens/Login/newUser.dart';
-import '../../Models/event.dart';
+import 'package:http/http.dart' as http;
+import 'package:summer_school_23_code/Services/contract.dart';
 import './card.dart';
 import './drawer.dart';
-import 'package:http/http.dart' as http;
+import 'package:web3dart/web3dart.dart';
 
 final LocalStorage storage = LocalStorage('data');
 
-TextEditingController title = TextEditingController();
-TextEditingController content = TextEditingController();
+TextEditingController name = TextEditingController();
+TextEditingController description = TextEditingController();
 TextEditingController date = TextEditingController();
 TextEditingController exp_date = TextEditingController();
 
@@ -25,20 +27,29 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<dynamic> EventList = [];
-  late Map<String, dynamic> local;
+  User? user;
 
-  String role = '';
-
-  getRole() async {
-    var r = await storage.getItem('values');
-    setState(() {
-      local = r;
-      role = r["role"];
-    });
+  getMe() async {
+    final token = await storage.getItem("token");
+    try {
+      var data = await http.get(Uri.parse("http://localhost:8000/user/$token"));
+      final body = jsonDecode(data.body);
+      setState(() {
+        user = User(
+            user_id: body["user_id"],
+            name: body["name"],
+            email: body["email"],
+            role: body["role"],
+            metamaskId: body["meta_mask_id"]);
+      });
+    } catch (error) {
+      print(error);
+    }
   }
 
   getEvents() {
     http.get(Uri.parse('http://localhost:8000/events')).then((value) {
+      print(value.body);
       setState(() {
         EventList = jsonDecode(value.body);
       });
@@ -46,15 +57,15 @@ class _HomeState extends State<Home> {
   }
 
   handleSubmit() async {
-    var user_id = local["my_id"];
     Map<String, dynamic> data = {
-      "title": title.text,
-      "content": content.text,
+      "name": name.text,
+      "description": description.text,
       "date": date.text,
       "exp_date": exp_date.text,
-      "user_id": user_id
+      "user_id": user?.user_id,
+      "is_valid": true
     };
-    http.post(Uri.parse("http://localhost:8000/events/$user_id"),
+    http.post(Uri.parse("http://localhost:8000/events/${user?.user_id}"),
         body: jsonEncode(data),
         headers: {'Content-Type': 'application/json'}).then((value) {
       Navigator.of(context).pop();
@@ -64,7 +75,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    getRole();
+    getMe();
     getEvents();
     super.initState();
   }
@@ -82,13 +93,14 @@ class _HomeState extends State<Home> {
         itemCount: EventList.length,
         itemBuilder: (context, index) {
           return CustomCard(
-            postContent: EventList[index]['content'],
+            event_id: BigInt.from(EventList[index]['event_id']),
+            postContent: EventList[index]['description'],
             postDate: EventList[index]['date'],
-            postTitle: EventList[index]['title'],
+            postTitle: EventList[index]['name'],
           );
         },
       ),
-      floatingActionButton: role == "ORGANIZER"
+      floatingActionButton: user?.role == "ORGANIZER"
           ? FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
@@ -108,8 +120,8 @@ class _HomeState extends State<Home> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CustomTextField("Tile", 360, title),
-          CustomTextField("Description", 360, content),
+          CustomTextField("Tile", 360, name),
+          CustomTextField("Description", 360, description),
           CustomTextField("Date of the Event", 360, date),
           CustomTextField("Closing Date", 360, exp_date),
           Container(

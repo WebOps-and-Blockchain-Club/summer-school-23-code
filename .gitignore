@@ -1,0 +1,17 @@
+Backend/dist
+Backend/.env
+Backend/node_modules
+Backend/yarn.lock
+Backend/package-lock.json
+Frontend/**/doc/api/
+Frontend/**/ios/Flutter/.last_build_id
+Frontend/.dart_tool/
+Frontend/.flutter-plugins
+Frontend/.flutter-plugins-dependencies
+Frontend/.packages
+Frontend/.pub-cache/
+Frontend/.pub/
+Frontend/build/
+Frontend/android/app/debug
+Frontend/android/app/profile
+Frontend/android/app/release

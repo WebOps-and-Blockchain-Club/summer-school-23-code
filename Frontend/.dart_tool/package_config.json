@@ -32,8 +32,32 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "convert",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "eip1559",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/eip1559-0.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "eip55",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/eip55-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -92,6 +116,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "json_rpc_2",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/json_rpc_2-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
@@ -118,6 +148,12 @@
     {
       "name": "meta",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "nested",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -176,10 +212,28 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "pointycastle",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "process",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/provider-6.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sec",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/sec-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "sky_engine",
@@ -202,6 +256,12 @@
     {
       "name": "stream_channel",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "stream_transform",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -230,10 +290,28 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/uuid-3.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "wallet",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/wallet-0.0.12+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "web3dart",
+      "rootUri": "file:///Users/rasagnyagudipudi/.pub-cache/hosted/pub.dev/web3dart-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "win32",
@@ -254,7 +332,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-07-22T12:43:28.456753Z",
+  "generated": "2023-07-24T20:13:48.992747Z",
   "generator": "pub",
   "generatorVersion": "3.1.0-113.0.dev"
 }

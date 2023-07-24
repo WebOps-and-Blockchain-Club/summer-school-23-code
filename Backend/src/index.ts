@@ -2,7 +2,7 @@ import "reflect-metadata";
 import express from "express";
 import { User } from "./entities/user";
 import AppDataSource from "./config";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -34,19 +34,19 @@ app.post("/registration", async (req, resp) => {
       { expiresIn: "2h" },
       (error, token) => {
         if (error) {
-          resp.json({ userInserted: "Cant Intsert the User" });
+          resp.json({ result: "Cant Intsert the User" });
+          return;
         }
-        resp.json({ auth: token });
+        resp.json({ auth: token, result: "user Registered" });
         return;
       }
     );
-    resp.send("user Registered");
   } else {
     resp.json({ result: "User already exists" });
   }
 });
 
-app.get("/login", async (req, resp) => {
+app.post("/login", async (req, resp) => {
   const userRepo = AppDataSource.getRepository(User);
   let user = await userRepo.findOne({ where: { email: req.body.email } });
   if (user) {
@@ -59,15 +59,16 @@ app.get("/login", async (req, resp) => {
         { expiresIn: "2h" },
         (error, token) => {
           if (error) {
-            resp.json({ user: "user not found" });
+            resp.json({ result: "user not found" });
+            return;
           }
-          resp.json({ auth: token, role: user?.role });
+          resp.json({ auth: token });
           return;
         }
       );
     }
   } else {
-    resp.json({ user: "Please register" });
+    resp.json({ result: "Please register" });
   }
 });
 
@@ -76,7 +77,7 @@ app.get("/events/:id", async (req, resp) => {
   if (req.params.id) {
     console.log(req.params.id);
     const events = await eventRepo.findOne({
-      where: { event_id: req.params.id },
+      where: { event_id: Number(req.params.id) },
     });
     resp.json(events);
   }
@@ -96,13 +97,21 @@ app.get("/events_org/:user_id", async (req, resp) => {
   resp.json(events);
 });
 
-app.get("/user/:user_id", async (req, resp) => {
+app.get("/user/:token", async (req, resp) => {
+  console.log("called");
+  console.log(req.params.token);
   const userRepo = AppDataSource.getRepository(User);
-  const user = await userRepo.find({ where: { user_id: req.params.user_id } });
+  let { id } = jwt.verify(
+    req.params.token,
+    process.env.TOKEN_SECRET
+  ) as JwtPayload;
+  const user = await userRepo.findOne({ where: { user_id: id } });
   resp.json(user);
 });
 
 app.post("/events/:user_id", async (req, resp) => {
+  console.log("hereee");
+  console.log(req.body);
   const eventRepo = AppDataSource.getRepository(Events);
   let event = new Events();
   event = { ...req.body };

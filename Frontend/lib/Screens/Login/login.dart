@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:summer_school_23_code/Screens/Home/main.dart';
 import 'package:http/http.dart' as http;
+import 'package:summer_school_23_code/Screens/Login/newUser.dart';
+import 'package:web3dart/web3dart.dart';
 
 TextEditingController email = TextEditingController();
 TextEditingController pass = TextEditingController();
@@ -28,11 +31,18 @@ void handleLogin(BuildContext context) {
       headers: {'Content-Type': 'application/json'}).then((value) async {
     final Map<String, dynamic> data = json.decode(value.body);
 
-    await storage.setItem("values",
-        {"token": data["auth"], "role": data["role"], "my_id": data["id"]});
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Home()));
-  });
+    if (data["auth"] == null)
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(data["result"]),
+      ));
+    else {
+      print(data["auth"]);
+      await storage.setItem("token", data["auth"]);
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Home()));
+    }
+  }).catchError((e) => print(e));
 }
 
 Widget Email(TextEditingController controller) {
@@ -186,7 +196,10 @@ class _LoginState extends State<Login> {
                         style: TextStyle(fontSize: 16),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewUserForm())),
                           child: const Text(
                             "Sign Up",
                             style: TextStyle(fontSize: 16),

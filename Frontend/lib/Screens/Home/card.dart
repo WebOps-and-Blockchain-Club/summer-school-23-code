@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:summer_school_23_code/Services/contract.dart';
 
 class CustomCard extends StatefulWidget {
+  final BigInt event_id;
   final String postContent;
   final String postTitle;
   final String postDate;
@@ -9,7 +12,8 @@ class CustomCard extends StatefulWidget {
       {Key? key,
       required this.postContent,
       required this.postTitle,
-      required this.postDate})
+      required this.postDate,
+      required this.event_id})
       : super(key: key);
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -59,7 +63,14 @@ class _CustomCardState extends State<CustomCard> {
                 ),
                 TextButton(
                   child: const Text('BUY TICKETS'),
-                  onPressed: () {/* ... */},
+                  onPressed: () async {
+                    try {
+                      await Provider.of<Contract>(context, listen: false)
+                          .transferTicket(widget.event_id);
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                 ),
                 const SizedBox(width: 8),
                 const SizedBox(width: 8),
