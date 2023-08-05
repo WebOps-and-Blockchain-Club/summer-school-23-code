@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^1.1.0
   localstorage: ^4.0.1+4
+  web3dart: ^2.7.0
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,7 @@ flutter:
     - assets/loginImage.jpg
     - assets/DrawerImage.jpg
     - assets/
+    - abi.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

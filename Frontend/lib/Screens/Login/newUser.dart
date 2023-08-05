@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:summer_school_23_code/Models/user.dart';
 import 'package:summer_school_23_code/Screens/Home/main.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
@@ -33,14 +31,18 @@ void handleSignUp(BuildContext context, String role) {
   http.post(Uri.parse('http://localhost:8000/registration'),
       body: json.encode(body),
       headers: {'Content-Type': 'application/json'}).then((value) async {
+    print(value.body);
     final Map<String, dynamic> data = json.decode(value.body);
-
-    await storage.setItem("values",
-        {"token": data["auth"], "role": data["role"], "my_id": data["id"]});
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Home()));
-  });
+    if (data["auth"] == null)
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(data["result"]),
+      ));
+    else {
+      await storage.setItem("values", {"token": data["auth"]});
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Home()));
+    }
+  }).catchError((error) => print(error));
 }
 
 Widget SignButton(BuildContext context, String role) {

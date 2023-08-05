@@ -2,21 +2,24 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name: "Events" })
 export class Events {
-    @PrimaryGeneratedColumn("uuid")
-    event_id!: string;
+  @PrimaryGeneratedColumn()
+  event_id!: number;
 
-    @Column()
-    name!: string;
+  @Column()
+  name!: string;
 
-    @Column()
-    date!: string;
+  @Column()
+  description!: string;
 
-    @Column()
-    exp_date!: string;
+  @Column()
+  date!: string;
 
-    @Column()
-    user_id!: string;
+  @Column()
+  exp_date!: string;
 
-    @Column()
-    is_valid!: boolean;
+  @Column()
+  user_id!: string;
+
+  @Column()
+  is_valid!: boolean;
 }
